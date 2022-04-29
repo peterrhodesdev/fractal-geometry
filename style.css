@@ -1,0 +1,33 @@
+
+.square-element-container {
+  position: relative;
+  width: 80%; /* desired canvas width */
+  margin-left: 10%;
+  max-width: 600px;
+  min-width: 200px;
+  margin-top: 1em;
+}
+
+.square-element-container:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.square-element-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.input-values > label {
+  display: block;
+  margin-top: 1em;
+}
