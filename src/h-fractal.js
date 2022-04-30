@@ -2,13 +2,13 @@ function drawPattern(
   context,
   centreX,
   centreY,
-  level,
-  maxLevel,
+  currentOrder,
+  maxOrder,
   width,
   height,
   baseUnitLength
 ) {
-  const unitLength = baseUnitLength * 2 ** (maxLevel - level);
+  const unitLength = baseUnitLength * 2 ** (maxOrder - currentOrder);
   const leftX = centreX - unitLength;
   const rightX = Math.min(width - 1, centreX + unitLength);
   const topY = centreY - unitLength / 2;
@@ -25,8 +25,7 @@ function drawPattern(
   context.closePath();
 
   // Recursively draw H's centered at the top and bottom of each vertical segment
-  if (level < maxLevel) {
-    const nextLevel = level + 1;
+  if (currentOrder < maxOrder) {
     const verticalSegmentPoints = [
       [leftX, topY],
       [leftX, bottomY],
@@ -38,8 +37,8 @@ function drawPattern(
         context,
         point[0],
         point[1],
-        nextLevel,
-        maxLevel,
+        currentOrder + 1,
+        maxOrder,
         width,
         height,
         baseUnitLength
@@ -48,9 +47,10 @@ function drawPattern(
   }
 }
 
-function draw(context, maxLevel) {
-  if (!isFinite(maxLevel) || maxLevel < 1) {
-    throw new Error(`maxLevel (${maxLevel}) must be a number that is >= 1`);
+function draw(context, order) {
+  const orderNumber = parseInt(order);
+  if (!isFinite(orderNumber) || orderNumber < 0) {
+    throw new Error(`order (${order}) must be a whole number that is >= 0`);
   }
 
   const width = context.canvas.clientWidth;
@@ -58,14 +58,14 @@ function draw(context, maxLevel) {
   context.clearRect(0, 0, width, height);
 
   // Length of the vertical side of the smallest H
-  const baseUnitLength = Math.min(width, height / 2) / (2 ** maxLevel - 1);
+  const baseUnitLength = Math.min(width, height / 2) / (2 ** (orderNumber + 1) - 1);
 
   drawPattern(
     context,
     width / 2,
     height / 2,
-    1,
-    maxLevel,
+    0,
+    orderNumber,
     width,
     height,
     baseUnitLength
@@ -73,4 +73,3 @@ function draw(context, maxLevel) {
 }
 
 export { draw };
-

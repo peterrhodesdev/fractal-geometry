@@ -2,7 +2,7 @@ import * as hFractal from "./src/h-fractal.js";
 
 const canvas = document.getElementById("canvas");
 const fractalSelect = document.getElementById("fractals");
-const maxLevelInput = document.getElementById("max-level");
+const orderInput = document.getElementById("order");
 
 function draw() {
   if (canvas.getContext) {
@@ -14,11 +14,11 @@ function draw() {
     context.translate(0.5, 0.5);
 
     const fractal = fractalSelect.options[fractalSelect.selectedIndex].value;
-    const maxLevel = maxLevelInput.value;
+    const order = orderInput.value;
     
     switch (fractal) {
       case "h-fractal":
-        hFractal.draw(context, maxLevel);
+        hFractal.draw(context, order);
         break;
       default:
         throw new Error(`unknown fractal selected: ${fractal}`);
@@ -30,8 +30,7 @@ function draw() {
   }
 }
 
-maxLevelInput.addEventListener("change", (event) => draw());
+orderInput.addEventListener("change", (event) => draw());
 
 draw();
 window.addEventListener("resize", draw);
-
