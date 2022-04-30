@@ -1,3 +1,5 @@
+import { getParams } from "./helpers.js";
+
 function drawPattern(
   context,
   centreX,
@@ -48,14 +50,7 @@ function drawPattern(
 }
 
 function draw(context, order) {
-  const orderNumber = parseInt(order);
-  if (!isFinite(orderNumber) || orderNumber < 0) {
-    throw new Error(`order (${order}) must be a whole number that is >= 0`);
-  }
-
-  const width = context.canvas.clientWidth;
-  const height = context.canvas.clientHeight;
-  context.clearRect(0, 0, width, height);
+  const [ width, height, orderNumber ] = getParams(context, order);
 
   // Length of the vertical side of the smallest H
   const baseUnitLength = Math.min(width, height / 2) / (2 ** (orderNumber + 1) - 1);

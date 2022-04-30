@@ -1,4 +1,5 @@
 import * as hFractal from "./src/h-fractal.js";
+import * as sierpinskiTriangle from "./src/sierpinski-triangle.js";
 
 const canvas = document.getElementById("canvas");
 const fractalSelect = document.getElementById("fractals");
@@ -10,6 +11,7 @@ function draw() {
     canvas.height = canvas.clientHeight;
 
     const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
     context.lineWidth = 1;
     context.translate(0.5, 0.5);
 
@@ -19,6 +21,9 @@ function draw() {
     switch (fractal) {
       case "h-fractal":
         hFractal.draw(context, order);
+        break;
+      case "sierpinski-triangle":
+        sierpinskiTriangle.draw(context, order);
         break;
       default:
         throw new Error(`unknown fractal selected: ${fractal}`);
@@ -30,6 +35,7 @@ function draw() {
   }
 }
 
+fractalSelect.addEventListener("change", (event) => draw());
 orderInput.addEventListener("change", (event) => draw());
 
 draw();
