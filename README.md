@@ -1,10 +1,13 @@
-# Fractal Geometry
+# Fractal Patterns
 
 Drawing various fractal patterns on a HTML canvas using JavaScript.
 
 - Cantor set
 - H-Fractal
+- Sierpiński carpet
 - Sierpiński triangle
+
+[DEMO](https://peterrhodesdev.github.io/fractal-patterns/)
 
 ## Run
 
