@@ -1,3 +1,4 @@
+import * as cantorSet from "./src/cantor-set.js";
 import * as hFractal from "./src/h-fractal.js";
 import * as sierpinskiTriangle from "./src/sierpinski-triangle.js";
 
@@ -19,6 +20,9 @@ function draw() {
     const order = orderInput.value;
     
     switch (fractal) {
+      case "cantor-set":
+        cantorSet.draw(context, order);
+        break;
       case "h-fractal":
         hFractal.draw(context, order);
         break;
