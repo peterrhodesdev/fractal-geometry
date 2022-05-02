@@ -8,8 +8,9 @@ function removeSubSquares(
   leftX,
   topY
 ) {
-  if (currentOrder < maxOrder) {
-    const subSquareSideLength = squareSideLength / 3;
+  let subSquareSideLength = squareSideLength / 3;
+  if (currentOrder < maxOrder && subSquareSideLength > 1) {
+    subSquareSideLength = Math.round(subSquareSideLength);
     context.fillRect(
       leftX + subSquareSideLength,
       topY + subSquareSideLength,
@@ -45,8 +46,8 @@ function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
 
   const squareSideLength = Math.min(width, height);
-  const squareLeftX = (width - squareSideLength) / 2;
-  const squareTopY = (width - squareSideLength) / 2;
+  const squareLeftX = Math.floor((width - squareSideLength) / 2);
+  const squareTopY = Math.floor((width - squareSideLength) / 2);
 
   context.fillRect(squareLeftX, squareTopY, squareSideLength, squareSideLength);
   context.fillStyle = "white";

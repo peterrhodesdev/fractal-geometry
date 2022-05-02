@@ -9,16 +9,16 @@ function removeTriangles(
   triangleBaseCentreX,
   triangleBaseCentreY
 ) {
-  if (currentOrder < maxOrder) {
+  if (currentOrder < maxOrder && triangleBaseLength > 4) {
     context.beginPath();
     context.moveTo(triangleBaseCentreX, triangleBaseCentreY);
     context.lineTo(
-      triangleBaseCentreX + triangleBaseLength / 4,
-      triangleBaseCentreY - triangleHeight / 2
+      Math.round(triangleBaseCentreX + triangleBaseLength / 4),
+      Math.round(triangleBaseCentreY - triangleHeight / 2)
     );
     context.lineTo(
-      triangleBaseCentreX - triangleBaseLength / 4,
-      triangleBaseCentreY - triangleHeight / 2
+      Math.round(triangleBaseCentreX - triangleBaseLength / 4),
+      Math.round(triangleBaseCentreY - triangleHeight / 2)
     );
     context.fill();
 
@@ -26,9 +26,9 @@ function removeTriangles(
     const nextTriangleBaseLength = triangleBaseLength / 2;
     const nextTriangleHeight = triangleHeight / 2;
     const smallerTriangleCentrePoints = [
-      [triangleBaseCentreX - triangleBaseLength / 4, triangleBaseCentreY],
-      [triangleBaseCentreX + triangleBaseLength / 4, triangleBaseCentreY],
-      [triangleBaseCentreX, triangleBaseCentreY - triangleHeight / 2],
+      [Math.round(triangleBaseCentreX - triangleBaseLength / 4), triangleBaseCentreY],
+      [Math.round(triangleBaseCentreX + triangleBaseLength / 4), triangleBaseCentreY],
+      [triangleBaseCentreX, Math.round(triangleBaseCentreY - triangleHeight / 2)],
     ];
     for (const point of smallerTriangleCentrePoints) {
       removeTriangles(
@@ -47,10 +47,11 @@ function removeTriangles(
 function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
 
-  const triangleBaseLength = Math.min(width, (2 / Math.sqrt(3)) * height);
-  const triangleHeight = (Math.sqrt(3) / 2) * triangleBaseLength;
+  let triangleBaseLength = Math.floor(Math.min(width, (2 / Math.sqrt(3)) * height));
+  triangleBaseLength -= triangleBaseLength % 2;
+  let triangleHeight = Math.floor((Math.sqrt(3) / 2) * triangleBaseLength);
   const triangleBaseCentreX = width / 2;
-  const triangleBaseCentreY = height - (height - triangleHeight) / 2;
+  const triangleBaseCentreY = Math.floor(height - (height - triangleHeight) / 2);
 
   context.beginPath();
   context.moveTo(

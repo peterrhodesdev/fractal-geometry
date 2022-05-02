@@ -9,8 +9,9 @@ function deleteOpenMiddleThirds(
   lineSegmentHeight,
   topY
 ) {
-  if (currentOrder < toOrder) {
-    const middleThirdWidth = (rightX - leftX) / 3;
+  let middleThirdWidth = (rightX - leftX) / 3;
+  if (currentOrder < toOrder && middleThirdWidth > 1) {
+    middleThirdWidth = Math.round(middleThirdWidth);
     const middleThirdLeftX = leftX + middleThirdWidth;
     
     // Added extra height to account for rounding errors
@@ -47,7 +48,7 @@ function deleteOpenMiddleThirds(
 function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
 
-  const lineSegmentHeight = height / (2 * orderNumber + 1);
+  const lineSegmentHeight = Math.floor(height / (2 * orderNumber + 1));
 
   for (let i = 0; i <= orderNumber; i += 1) {
     const topY = lineSegmentHeight * (i * 2);

@@ -28,6 +28,7 @@ function drawPattern(
 
   // Recursively draw H's centered at the top and bottom of each vertical segment
   if (currentOrder < maxOrder) {
+    const nextOrder = currentOrder + 1;
     const verticalSegmentPoints = [
       [leftX, topY],
       [leftX, bottomY],
@@ -39,7 +40,7 @@ function drawPattern(
         context,
         point[0],
         point[1],
-        currentOrder + 1,
+        nextOrder,
         maxOrder,
         width,
         height,
@@ -49,18 +50,28 @@ function drawPattern(
   }
 }
 
+function calculateBaseUnitLength(width, height, orderNumber) {
+  return Math.floor(Math.min(width, height / 2) / (2 ** (orderNumber + 1) - 1));
+}
+
 function draw(context, order) {
   const [ width, height, orderNumber ] = getParams(context, order);
 
   // Length of the vertical side of the smallest H
-  const baseUnitLength = Math.min(width, height / 2) / (2 ** (orderNumber + 1) - 1);
-
+  let baseUnitLength = calculateBaseUnitLength(width, height, orderNumber);
+  
+  let adjustedOrderNumber = orderNumber;
+  while (baseUnitLength < 3 && adjustedOrderNumber > 0) {
+    adjustedOrderNumber -= 1;
+    baseUnitLength = calculateBaseUnitLength(width, height, adjustedOrderNumber);
+  }
+  
   drawPattern(
     context,
-    width / 2,
-    height / 2,
+    Math.floor(width / 2),
+    Math.floor(height / 2),
     0,
-    orderNumber,
+    adjustedOrderNumber,
     width,
     height,
     baseUnitLength
