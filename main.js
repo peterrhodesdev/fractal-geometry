@@ -2,6 +2,7 @@ import * as cantorSet from "./src/cantor-set.js";
 import * as hFractal from "./src/h-fractal.js";
 import * as sierpinskiCarpet from "./src/sierpinski-carpet.js";
 import * as sierpinskiTriangle from "./src/sierpinski-triangle.js";
+import * as vicsekFractal from "./src/vicsek-fractal.js";
 
 const canvas = document.getElementById("canvas");
 const fractalSelect = document.getElementById("fractals");
@@ -33,6 +34,12 @@ function draw() {
       case "sierpinski-triangle":
         sierpinskiTriangle.draw(context, order);
         break;
+      case "vicsek-fractal-cross":
+        vicsekFractal.draw(context, order, "cross");
+        break;
+      case "vicsek-fractal-saltire":
+        vicsekFractal.draw(context, order, "saltire");
+        break;
       default:
         throw new Error(`unknown fractal selected: ${fractal}`);
     }
@@ -47,4 +54,3 @@ fractalSelect.addEventListener("change", (event) => draw());
 orderInput.addEventListener("change", (event) => draw());
 
 draw();
-window.addEventListener("resize", draw);
