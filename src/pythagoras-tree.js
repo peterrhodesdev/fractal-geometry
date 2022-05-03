@@ -1,8 +1,4 @@
-import { getParams } from "./helpers.js";
-
-function degreesToRadians(degrees) {
-  return (degrees * Math.PI) / 180;
-}
+import { degreesToRadians, getParams } from "./helpers.js";
 
 function drawPattern(
   context,

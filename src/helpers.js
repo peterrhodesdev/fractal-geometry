@@ -1,3 +1,12 @@
+
+function degreesToRadians(degrees) {
+  return (degrees * Math.PI) / 180;
+}
+
+function distanceBetweenTwoPoints(x1, y1, x2, y2) {
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}
+
 /**
  * Gets the common parameters needed to draw each fractal:
  * - width of the canvas
@@ -20,4 +29,4 @@ function getParams(context, order) {
   return [ width, height, orderNumber ];
 }
 
-export { getParams };
+export { degreesToRadians, distanceBetweenTwoPoints, getParams };

@@ -4,6 +4,7 @@ Drawing various fractal patterns on a HTML canvas using JavaScript.
 
 - Cantor set
 - H-Fractal
+- Koch snowflake
 - Pythagoras tree
 - Sierpiński carpet
 - Sierpiński triangle
