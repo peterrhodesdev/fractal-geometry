@@ -4,8 +4,10 @@ Drawing various fractal patterns on a HTML canvas using JavaScript.
 
 - Cantor set
 - H-Fractal
+- Pythagoras tree
 - Sierpiński carpet
 - Sierpiński triangle
+- Vicsek fractal
 
 [DEMO](https://peterrhodesdev.github.io/fractal-patterns/)
 

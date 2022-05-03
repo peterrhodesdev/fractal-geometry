@@ -1,5 +1,6 @@
 import * as cantorSet from "./src/cantor-set.js";
 import * as hFractal from "./src/h-fractal.js";
+import * as pythagorasTree from "./src/pythagoras-tree.js";
 import * as sierpinskiCarpet from "./src/sierpinski-carpet.js";
 import * as sierpinskiTriangle from "./src/sierpinski-triangle.js";
 import * as vicsekFractal from "./src/vicsek-fractal.js";
@@ -27,6 +28,9 @@ function draw() {
         break;
       case "h-fractal":
         hFractal.draw(context, order);
+        break;
+      case "pythagoras-tree":
+        pythagorasTree.draw(context, order);
         break;
       case "sierpinski-carpet":
         sierpinskiCarpet.draw(context, order);
