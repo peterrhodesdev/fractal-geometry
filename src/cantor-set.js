@@ -1,5 +1,7 @@
 import { getParams } from "./helpers.js";
 
+let maxDrawnOrder = 0;
+
 function deleteOpenMiddleThirds(
   context,
   currentOrder,
@@ -11,6 +13,8 @@ function deleteOpenMiddleThirds(
 ) {
   let middleThirdWidth = (rightX - leftX) / 3;
   if (currentOrder < toOrder && middleThirdWidth > 1) {
+    maxDrawnOrder = Math.max(maxDrawnOrder, currentOrder + 1);
+
     middleThirdWidth = Math.round(middleThirdWidth);
     const middleThirdLeftX = leftX + middleThirdWidth;
     
@@ -47,6 +51,7 @@ function deleteOpenMiddleThirds(
 
 function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
+  maxDrawnOrder = 0;
 
   const lineSegmentHeight = Math.floor(height / (2 * orderNumber + 1));
 
@@ -58,6 +63,8 @@ function draw(context, order) {
     deleteOpenMiddleThirds(context, 0, i, 0, width, lineSegmentHeight, topY);
     context.fillStyle = "black";
   }
+
+  return maxDrawnOrder;
 }
 
 export { draw };

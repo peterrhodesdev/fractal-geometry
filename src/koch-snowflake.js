@@ -4,6 +4,7 @@ import {
   getParams,
 } from "./helpers.js";
 
+let maxDrawnOrder = 0;
 const MINIMUM_TRIANGLE_SIDE_LENGTH = 3;
 
 function calculateThirdPoints(startX, startY, endX, endY) {
@@ -72,6 +73,8 @@ function drawTriangleSidePattern(
     currentOrder <= maxOrder &&
     triangleSideLength > MINIMUM_TRIANGLE_SIDE_LENGTH
   ) {
+    maxDrawnOrder = Math.max(maxDrawnOrder, currentOrder);
+
     if (drawLine) {
       context.beginPath();
       context.moveTo(startX, startY);
@@ -147,6 +150,7 @@ function drawTriangleSidePattern(
 
 function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
+  maxDrawnOrder = 0;
 
   const triangleSideLength = Math.min(
     width,
@@ -194,6 +198,8 @@ function draw(context, order) {
     240,
     true
   );
+
+  return maxDrawnOrder;
 }
 
 export { draw };

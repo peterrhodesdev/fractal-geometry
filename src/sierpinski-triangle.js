@@ -1,5 +1,7 @@
 import { getParams } from "./helpers.js";
 
+let maxDrawnOrder = 0;
+
 function removeTriangles(
   context,
   currentOrder,
@@ -10,6 +12,8 @@ function removeTriangles(
   triangleBaseCentreY
 ) {
   if (currentOrder < maxOrder && triangleBaseLength > 4) {
+    maxDrawnOrder = Math.max(maxDrawnOrder, currentOrder + 1);
+
     context.beginPath();
     context.moveTo(triangleBaseCentreX, triangleBaseCentreY);
     context.lineTo(
@@ -46,6 +50,7 @@ function removeTriangles(
 
 function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
+  maxDrawnOrder = 0;
 
   let triangleBaseLength = Math.floor(Math.min(width, (2 / Math.sqrt(3)) * height));
   triangleBaseLength -= triangleBaseLength % 2;
@@ -76,6 +81,8 @@ function draw(context, order) {
     triangleBaseCentreY
   );
   context.fillStyle = "black";
+
+  return maxDrawnOrder;
 }
 
 export { draw };

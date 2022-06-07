@@ -76,6 +76,8 @@ function draw(context, order) {
     height,
     baseUnitLength
   );
+
+  return adjustedOrderNumber;
 }
 
 export { draw };

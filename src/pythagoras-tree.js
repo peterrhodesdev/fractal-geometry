@@ -1,5 +1,7 @@
 import { degreesToRadians, getParams } from "./helpers.js";
 
+let maxDrawnOrder = 0;
+
 function drawPattern(
   context,
   currentOrder,
@@ -10,6 +12,8 @@ function drawPattern(
   rotation
 ) {
   if (currentOrder <= maxOrder && squareSideLength > 1) {
+    maxDrawnOrder = Math.max(maxDrawnOrder, currentOrder + 1);
+
     context.save();
     context.translate(squareBasePointX, squareBasePointY);
     context.rotate(degreesToRadians(rotation));
@@ -89,6 +93,7 @@ function calculateTreeHeight(maxOrder) {
 
 function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
+  maxDrawnOrder = 0;
 
   const treeWidth = calculateTreeWidth(orderNumber);
   const treeHeight = calculateTreeHeight(orderNumber);
@@ -111,6 +116,8 @@ function draw(context, order) {
     squareBasePointY,
     rotation
   );
+
+  return maxDrawnOrder;
 }
 
 export { draw };

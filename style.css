@@ -27,7 +27,15 @@
   height: 100%;
 }
 
-.input-values > label {
+.input-values label {
   display: block;
   margin-top: 1em;
+}
+
+.order-box {
+  display: flex;
+}
+
+#order-limited-note {
+  color: red;
 }

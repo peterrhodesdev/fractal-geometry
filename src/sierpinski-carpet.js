@@ -1,5 +1,7 @@
 import { getParams } from "./helpers.js";
 
+let maxDrawnOrder = 0;
+
 function removeSubSquares(
   context,
   currentOrder,
@@ -10,6 +12,8 @@ function removeSubSquares(
 ) {
   let subSquareSideLength = squareSideLength / 3;
   if (currentOrder < maxOrder && subSquareSideLength > 1) {
+    maxDrawnOrder = Math.max(maxDrawnOrder, currentOrder + 1);
+
     subSquareSideLength = Math.round(subSquareSideLength);
     context.fillRect(
       leftX + subSquareSideLength,
@@ -44,6 +48,7 @@ function removeSubSquares(
 
 function draw(context, order) {
   const [width, height, orderNumber] = getParams(context, order);
+  maxDrawnOrder = 0;
 
   const squareSideLength = Math.min(width, height);
   const squareLeftX = Math.floor((width - squareSideLength) / 2);
@@ -60,6 +65,8 @@ function draw(context, order) {
     squareTopY
   );
   context.fillStyle = "black";
+
+  return maxDrawnOrder;
 }
 
 export { draw };

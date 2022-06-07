@@ -9,6 +9,7 @@ import * as vicsekFractal from "./src/vicsek-fractal.js";
 const canvas = document.getElementById("canvas");
 const fractalSelect = document.getElementById("fractals");
 const orderInput = document.getElementById("order");
+const orderLimitedNote = document.getElementById("order-limited-note");
 
 function draw() {
   if (canvas.getContext) {
@@ -23,33 +24,39 @@ function draw() {
     const fractal = fractalSelect.options[fractalSelect.selectedIndex].value;
     const order = orderInput.value;
     
+    orderLimitedNote.innerText = " ";
+    let maxDrawnOrder;
     switch (fractal) {
       case "cantor-set":
-        cantorSet.draw(context, order);
+        maxDrawnOrder = cantorSet.draw(context, order);
         break;
       case "h-fractal":
-        hFractal.draw(context, order);
+        maxDrawnOrder = hFractal.draw(context, order);
         break;
       case "koch-snowflake":
-        kochSnowflake.draw(context, order);
+        maxDrawnOrder = kochSnowflake.draw(context, order);
         break;
       case "pythagoras-tree":
-        pythagorasTree.draw(context, order);
+        maxDrawnOrder = pythagorasTree.draw(context, order);
         break;
       case "sierpinski-carpet":
-        sierpinskiCarpet.draw(context, order);
+        maxDrawnOrder = sierpinskiCarpet.draw(context, order);
         break;
       case "sierpinski-triangle":
-        sierpinskiTriangle.draw(context, order);
+        maxDrawnOrder = sierpinskiTriangle.draw(context, order);
         break;
       case "vicsek-fractal-cross":
-        vicsekFractal.draw(context, order, "cross");
+        maxDrawnOrder = vicsekFractal.draw(context, order, "cross");
         break;
       case "vicsek-fractal-saltire":
-        vicsekFractal.draw(context, order, "saltire");
+        maxDrawnOrder = vicsekFractal.draw(context, order, "saltire");
         break;
       default:
         throw new Error(`unknown fractal selected: ${fractal}`);
+    }
+
+    if (maxDrawnOrder < order) {
+      orderLimitedNote.innerText = `* the order drawn to the canvas has been limited to ${maxDrawnOrder}`;
     }
   } else {
     const message = "canvas not supported by browser";

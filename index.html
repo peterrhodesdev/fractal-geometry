@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Fractals</title>
-    <meta charset="UTF-8">
+    <title>Fractal Patterns</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -19,8 +20,13 @@
         <option value="vicsek-fractal-cross">Vicsek fractal (cross)</option>
         <option value="vicsek-fractal-saltire">Vicsek fractal (saltire)</option>
       </select>
-      <label for="order">Order:</label>
-      <input type="number" id="order" min="0" max="9" value="3">
+      <div class="order-box">
+        <div>
+          <label for="order">Order:</label>
+          <input type="number" id="order" min="0" max="9" value="3">
+        </div>
+        <p id="order-limited-note"></p>
+      </div>
     </div>
     <div class="square-element-container">
       <div class="square-element-content">
